@@ -1,0 +1,33 @@
+// Define the pins
+#define SENSOR A0       // Moisture Sensor connected to A0
+#define LED_PIN 13      // LED connected to Pin 13
+#define BUZZER_PIN 12   // Buzzer connected to Pin 12
+
+// Set the threshold value
+int threshold = 400;    // Adjust based on your sensor's reading
+
+void setup() {
+  Serial.begin(9600);           // Start Serial Monitor
+  pinMode(LED_PIN, OUTPUT);     // LED as output
+  pinMode(BUZZER_PIN, OUTPUT);  // Buzzer as output
+
+  digitalWrite(LED_PIN, LOW);   // Turn off LED
+  digitalWrite(BUZZER_PIN, LOW); // Turn off Buzzer
+}
+
+void loop() {
+  int moisture = analogRead(SENSOR);  // Read moisture sensor value
+
+  Serial.print("Moisture Level: ");
+  Serial.println(moisture);           // Print value to serial monitor
+
+  if (moisture > threshold) {
+    digitalWrite(LED_PIN, HIGH);      // Turn on LED
+    digitalWrite(BUZZER_PIN, HIGH);   // Turn on Buzzer
+  } else {
+    digitalWrite(LED_PIN, LOW);       // Turn off LED
+    digitalWrite(BUZZER_PIN, LOW);    // Turn off Buzzer
+  }
+
+  delay(1000);  // Delay for 1 second
+}
